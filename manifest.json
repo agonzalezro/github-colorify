@@ -1,0 +1,12 @@
+{
+  "name": "GitHub colorify",
+  "description": "Add different colors to the GitHub timeline rows depending on the project",
+  "version": "0.1",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["jquery.min.js", "colorify.js"]
+    }
+  ]
+}
