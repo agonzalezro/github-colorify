@@ -21,6 +21,11 @@ to:
 3. Click on "Load unpacked extension" and select the path were you have
    downloaded this extension.
 
+Known bugs
+----------
+
+- If you click on "More", the new rows will not have colors.
+
 TODO
 ----
 - Add screenshot to the README.
