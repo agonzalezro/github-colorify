@@ -10,6 +10,8 @@ that will add colors to the rows on your github timeline. This will allow you
 to easily differentiate between projects because they will be grouped with the
 same background color.
 
+![example](example.png)
+
 Installation
 ------------
 
