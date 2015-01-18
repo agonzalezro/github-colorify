@@ -5,7 +5,8 @@ if (document.title === "GitHub") {
 
 function colorify() {
   BGCOLORS = [
-    "fce94f", "fcaf3e", "e9b96e", "8ae234", "729fcf", "ad7fa8", "ef2929", "eeeeec", "888a85"
+    "#8ddece", "#a0eabf", "#9acced", "#f8e287", "#f3bf91", "#f3a69e",
+    "#8bd0c2", "#93d7b0", "#94c0dc", "#f9ce89", "#e9aa80", "#e09c95"
   ]
 
   $(".alert").each(function(_, e) {
@@ -13,7 +14,8 @@ function colorify() {
     var color = getColorForProject(project)
 
     e.style.backgroundColor = color;
-    e.style.paddingTop = "10px";
+    e.style.paddingTop = "5px";
+    e.style.border = "5px solid " + color;
   });
 }
 
@@ -23,7 +25,7 @@ function getProjectName(e) {
 
 function getColorForProject(project) {
   if (!(project in colors)) {
-    colors[project] = "#" + BGCOLORS[Math.floor(Math.random() * BGCOLORS.length)]
+    colors[project] = BGCOLORS[Math.floor(Math.random() * BGCOLORS.length)]
   }
   return colors[project];
 }

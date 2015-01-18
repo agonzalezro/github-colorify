@@ -28,6 +28,7 @@ Known bugs
 
 TODO
 ----
+- Add MOAAAAAAAAAAARRR nice colors!
 - Add screenshot to the README.
 - Improve the CSS applied a little bit.
 - Persist the colors with some local storage.
