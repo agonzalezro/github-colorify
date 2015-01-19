@@ -25,9 +25,18 @@ to:
 
 TODO
 ----
+
 - Add MOAAAAAAAAAAARRR nice colors!
 - Improve the CSS applied a little bit.
-- Add a button to remove previous cache of colors.
 - Allow configuration for the "seen" projects background color.
 - Allow configuration for the list of colors.
 - Calculate the color instead set a random one?
+
+Acknowledges
+------------
+
+I got the app icon from here:
+http://png-1.findicons.com/files/icons/2808/jolly_icons_free/128/github.png
+
+I couldn't find any license attached to it, hope that it's free, but if you
+know the author let me know!

@@ -37,7 +37,7 @@ function assignEvents() {
 if (document.title === "GitHub") {
   var colors = {};
   chrome.storage.sync.get("colors", function(result) {
-    if (result != null) {
+    if (Object.keys.call(null, result).length !== 0) {
       colors = result.colors;
     }
     colorify();
