@@ -8,5 +8,8 @@
       "matches": ["https://github.com/*"],
       "js": ["jquery.min.js", "colorify.js"]
     }
+  ],
+  "permissions": [
+    "storage"
   ]
 }

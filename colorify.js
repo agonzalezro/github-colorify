@@ -1,6 +1,11 @@
 if (document.title === "GitHub") {
-  var colors = {}
-  colorify();
+  var colors = {};
+  chrome.storage.sync.get("colors", function(result) {
+    if (result != null) {
+      colors = result.colors;
+    }
+    colorify();
+  });
 }
 
 function colorify() {
@@ -25,7 +30,8 @@ function getProjectName(e) {
 
 function getColorForProject(project) {
   if (!(project in colors)) {
-    colors[project] = BGCOLORS[Math.floor(Math.random() * BGCOLORS.length)]
+    colors[project] = BGCOLORS[Math.floor(Math.random() * BGCOLORS.length)];
+    chrome.storage.sync.set({"colors": colors});
   }
   return colors[project];
 }
