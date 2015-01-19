@@ -1,19 +1,9 @@
-if (document.title === "GitHub") {
-  var colors = {};
-  chrome.storage.sync.get("colors", function(result) {
-    if (result != null) {
-      colors = result.colors;
-    }
-    colorify();
-  });
-}
+BGCOLORS = [
+  "#8ddece", "#a0eabf", "#9acced", "#f8e287", "#f3bf91", "#f3a69e",
+  "#8bd0c2", "#93d7b0", "#94c0dc", "#f9ce89", "#e9aa80", "#e09c95"
+]
 
 function colorify() {
-  BGCOLORS = [
-    "#8ddece", "#a0eabf", "#9acced", "#f8e287", "#f3bf91", "#f3a69e",
-    "#8bd0c2", "#93d7b0", "#94c0dc", "#f9ce89", "#e9aa80", "#e09c95"
-  ]
-
   $(".alert").each(function(_, e) {
     var project = getProjectName(e);
     var color = getColorForProject(project)
@@ -34,4 +24,23 @@ function getColorForProject(project) {
     chrome.storage.sync.set({"colors": colors});
   }
   return colors[project];
+}
+
+function assignEvents() {
+  $(document).ready(function() {
+    $(".js-events-pagination").click(function() {
+      setTimeout(function() { colorify(); assignEvents(); }, 1000)
+    });
+  });
+}
+
+if (document.title === "GitHub") {
+  var colors = {};
+  chrome.storage.sync.get("colors", function(result) {
+    if (result != null) {
+      colors = result.colors;
+    }
+    colorify();
+  });
+  assignEvents();
 }
