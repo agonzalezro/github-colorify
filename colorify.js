@@ -1,12 +1,14 @@
 BGCOLORS = [
-  "#8ddece", "#a0eabf", "#9acced", "#f8e287", "#f3bf91", "#f3a69e",
-  "#8bd0c2", "#93d7b0", "#94c0dc", "#f9ce89", "#e9aa80", "#e09c95"
+  "#e1f6f2", "#e5f2fa", "#f2eaf6", "#fdf7e0", "#fce8e6", "#f6f7f8"
 ]
 
 function colorify() {
+  var previousColor;
+
   $(".alert").each(function(_, e) {
     var project = getProjectName(e);
-    var color = getColorForProject(project)
+    var color = getColorForProject(project, previousColor);
+    previousColor = color;
 
     e.style.backgroundColor = color;
     e.style.paddingTop = "5px";
@@ -19,9 +21,13 @@ function getProjectName(e) {
   return name.split('@')[0];
 }
 
-function getColorForProject(project) {
+function getColorForProject(project, previousColor) {
   if (!(project in colors)) {
-    colors[project] = BGCOLORS[Math.floor(Math.random() * BGCOLORS.length)];
+    var color = BGCOLORS[Math.floor(Math.random() * BGCOLORS.length)];
+    if (color == previousColor) {
+      return getColorForProject(project, previousColor);
+    }
+    colors[project] = color;
     chrome.storage.sync.set({"colors": colors});
   }
   return colors[project];
