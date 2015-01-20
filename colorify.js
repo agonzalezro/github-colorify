@@ -15,7 +15,8 @@ function colorify() {
 }
 
 function getProjectName(e) {
-  return $(e).find('.title > a:last').text().split('#')[0];
+  name = $(e).find('.title > a:last').text().split('#')[0];
+  return name.split('@')[0];
 }
 
 function getColorForProject(project) {
