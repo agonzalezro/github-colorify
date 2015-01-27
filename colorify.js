@@ -1,53 +1,63 @@
-BGCOLORS = [
-  "#e1f6f2", "#e5f2fa", "#f2eaf6", "#fdf7e0", "#fce8e6", "#f6f7f8"
-]
+(function (document, chrome) {
 
-function colorify() {
-  var previousColor;
+  var colorify = {};
 
-  $(".alert").each(function(_, e) {
-    var project = getProjectName(e);
-    var color = getColorForProject(project, previousColor);
-    previousColor = color;
+  colorify.init = function () {
+    var self = this;
 
-    e.style.backgroundColor = color;
-    e.style.paddingTop = "5px";
-    e.style.border = "5px solid " + color;
-  });
-}
-
-function getProjectName(e) {
-  name = $(e).find('.title > a:last').text().split('#')[0];
-  return name.split('@')[0];
-}
-
-function getColorForProject(project, previousColor) {
-  if (!(project in colors)) {
-    var color = BGCOLORS[Math.floor(Math.random() * BGCOLORS.length)];
-    if (color == previousColor) {
-      return getColorForProject(project, previousColor);
-    }
-    colors[project] = color;
-    chrome.storage.sync.set({"colors": colors});
-  }
-  return colors[project];
-}
-
-function assignEvents() {
-  $(document).ready(function() {
-    $(".js-events-pagination").click(function() {
-      setTimeout(function() { colorify(); assignEvents(); }, 1000)
+    chrome.storage.sync.get('colors', function(result) {
+      if (Object.keys.call(null, result).length !== 0) {
+        self.colors = result.colors;
+      } else {
+        self.colors = {};
+      }
     });
-  });
-}
 
-if (document.title === "GitHub") {
-  var colors = {};
-  chrome.storage.sync.get("colors", function(result) {
-    if (Object.keys.call(null, result).length !== 0) {
-      colors = result.colors;
+    document.onreadystatechange = function () {
+      if (document.readyState == "complete") {
+        self.paint();
+        document.querySelector('.js-events-pagination').onclick = function () {
+          setTimeout(function () {
+            self.paint();
+          }, 1000);
+        }
+      }
     }
-    colorify();
-  });
-  assignEvents();
-}
+  };
+
+  colorify.paint = function () {
+    var self = this,
+        previousColor;
+
+    [].forEach.call(document.querySelectorAll('.alert'), function (element) {
+      var project = self.getProjectName(element),
+          color = self.getColorForProject(project, previousColor);
+      console.log(color, project);
+      previousColor = color;
+      element.style.paddingTop = '5px';
+      element.style.borderLeft = '7px solid #' + color;
+      element.style.borderTop = '0';
+    });
+  };
+
+  colorify.getProjectName = function (element) {
+    var link = [].pop.call(element.getElementsByClassName('title')[0].getElementsByTagName('a'));
+
+    return link.innerHTML.split('#')[0].split('@')[0];
+  };
+
+  colorify.getColorForProject = function (project, previousColor) {
+    if (!(project in this.colors)) {
+      var color = ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
+      if (color === previousColor) {
+        return this.getColorForProject(project, previousColor);
+      }
+      this.colors[project] = color;
+      chrome.storage.sync.set({'colors': this.colors});
+    }
+    return this.colors[project];
+  };
+
+  colorify.init();
+
+})(document, chrome);
