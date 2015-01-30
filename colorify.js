@@ -1,6 +1,14 @@
 (function (document, chrome) {
 
-  var colorify = {};
+  var colorify = {},
+      randomColor = function () {
+        return ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
+      },
+      extractProjectName = function (element) {
+        var link = Array.prototype.pop.call(element.getElementsByClassName('title')[0].getElementsByTagName('a'));
+
+        return link.innerHTML.split('#')[0].split('@')[0];
+      };
 
   colorify.init = function () {
     var self = this;
@@ -29,10 +37,10 @@
     var self = this,
         previousColor;
 
-    [].forEach.call(document.querySelectorAll('.alert'), function (element) {
-      var project = self.getProjectName(element),
+    Array.prototype.forEach.call(document.querySelectorAll('.alert'), function (element) {
+      var project = extractProjectName(element),
           color = self.getColorForProject(project, previousColor);
-      console.log(color, project);
+
       previousColor = color;
       element.style.paddingTop = '5px';
       element.style.borderLeft = '7px solid #' + color;
@@ -40,15 +48,9 @@
     });
   };
 
-  colorify.getProjectName = function (element) {
-    var link = [].pop.call(element.getElementsByClassName('title')[0].getElementsByTagName('a'));
-
-    return link.innerHTML.split('#')[0].split('@')[0];
-  };
-
   colorify.getColorForProject = function (project, previousColor) {
     if (!(project in this.colors)) {
-      var color = ('00000' + (Math.random() * (1 << 24) | 0).toString(16)).slice(-6);
+      var color = randomColor();
       if (color === previousColor) {
         return this.getColorForProject(project, previousColor);
       }
@@ -59,5 +61,4 @@
   };
 
   colorify.init();
-
 })(document, chrome);

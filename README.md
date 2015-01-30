@@ -29,7 +29,7 @@ TODO
 - Improve the CSS applied a little bit.
 - Allow configuration for the "seen" projects background color.
 - Allow configuration for the list of colors.
-- Improve color load for projects when clicking on 'more' button
+- Improve color load for projects when clicking on 'more' button.
 
 Acknowledges
 ------------
