@@ -26,11 +26,10 @@ to:
 TODO
 ----
 
-- Add MOAAAAAAAAAAARRR nice colors!
 - Improve the CSS applied a little bit.
 - Allow configuration for the "seen" projects background color.
 - Allow configuration for the list of colors.
-- Calculate the color instead set a random one?
+- Improve color load for projects when clicking on 'more' button.
 
 Acknowledges
 ------------

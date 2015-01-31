@@ -1,12 +1,15 @@
-$(document).ready(function() {
-  $("#refresh").click(function(e) {
-    chrome.storage.sync.clear();
-    e.preventDefault();
-    chrome.tabs.query({title: "GitHub"}, function(tabs) {
-      $(tabs).each(function(_, tab) {
-        chrome.tabs.reload(tab.id);
+document.onreadystatechange = function () {
+  if (document.readyState == "complete") {
+    document.querySelector('#refresh').onclick = function (event) {
+      event.preventDefault();
+      chrome.storage.sync.clear();
+
+      chrome.tabs.query({title: "GitHub"}, function(tabs) {
+        tabs.forEach(function (tab) {
+          chrome.tabs.reload(tab.id);
+        });
       });
-    });
-    close();
-  });
-});
+      window.close();
+    }
+  }
+};
