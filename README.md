@@ -34,8 +34,5 @@ TODO
 Acknowledges
 ------------
 
-I got the app icon from here:
-http://png-1.findicons.com/files/icons/2808/jolly_icons_free/128/github.png
-
-I couldn't find any license attached to it, hope that it's free, but if you
-know the author let me know!
+The icon is part of the freebies from the
+[Jolly icons](http://jollyicons.com/#freebies) collection. Thanks!
