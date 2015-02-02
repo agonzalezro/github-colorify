@@ -3,7 +3,7 @@ github-colorify
 
 github-colorify is an extension for:
 
-- [x] Chrome
+- [x] [Chrome](https://chrome.google.com/webstore/detail/github-colorify/ickocnbebpjegbihfedkpamhggljgagb?hl=en&gl=GB)
 - [ ] Firefox
 
 that will add colors to the rows on your github timeline. This will allow you
